@@ -21,7 +21,7 @@ public class TransactionController {
     private final TransactionService transactionService;
 
     @PostMapping
-    public ResponseEntity<TransactionResponse> save(@RequestBody TransactionPostBody transactionPostBody) {
+    public ResponseEntity<TransactionResponse> save(@RequestBody @Valid TransactionPostBody transactionPostBody) {
         TransactionResponse transactionResponse = transactionService.save(transactionPostBody);
         return new ResponseEntity<>(transactionResponse, HttpStatus.CREATED);
     }
