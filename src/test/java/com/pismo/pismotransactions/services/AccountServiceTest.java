@@ -4,6 +4,7 @@ import com.pismo.pismotransactions.exception.AccountException;
 import com.pismo.pismotransactions.model.Account;
 import com.pismo.pismotransactions.repository.AccountRepository;
 import com.pismo.pismotransactions.requests.AccountResponse;
+import com.pismo.pismotransactions.services.impl.AccountServiceIml;
 import com.pismo.pismotransactions.util.AccountCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +24,7 @@ import static org.mockito.Mockito.when;
 class AccountServiceTest {
 
     @InjectMocks
-    private AccountService accountService;
+    private AccountServiceIml accountServiceIml;
 
     @Mock
     private AccountRepository accountRepository;
@@ -36,7 +37,7 @@ class AccountServiceTest {
 
     @Test
     void save() {
-        AccountResponse accountSaved = accountService
+        AccountResponse accountSaved = accountServiceIml
                 .save(AccountCreator.createAccountPostRequest());
 
         assertThat(accountSaved).isNotNull();
@@ -48,7 +49,7 @@ class AccountServiceTest {
         when(accountRepository.findByDocumentNumber(ArgumentMatchers.any(Long.class))).thenReturn(Optional.ofNullable(AccountCreator.createValidAccount()));
         Long expecteddocument = AccountCreator.createValidAccount().getDocumentNumber();
 
-        var account = accountService.findByDocumentNumber(123456l);
+        var account = accountServiceIml.findByDocumentNumber(123456l);
 
         assertThat(account).isNotNull();
 
@@ -60,7 +61,7 @@ class AccountServiceTest {
     void findBydocumentOrThrowAccountException() {
         when(accountRepository.findByDocumentNumber(ArgumentMatchers.any(Long.class))).thenReturn(Optional.ofNullable(AccountCreator.createValidAccount()));
         assertThatExceptionOfType(AccountException.class)
-                .isThrownBy(() -> accountService
+                .isThrownBy(() -> accountServiceIml
                         .save(AccountCreator.createAccountPostRequest()));
     }
 

@@ -1,6 +1,5 @@
 package com.pismo.pismotransactions.services;
 
-import com.pismo.pismotransactions.exception.AccountException;
 import com.pismo.pismotransactions.exception.TransactionException;
 import com.pismo.pismotransactions.model.Account;
 import com.pismo.pismotransactions.model.Transaction;
@@ -8,6 +7,7 @@ import com.pismo.pismotransactions.repository.AccountRepository;
 import com.pismo.pismotransactions.repository.OperationTypetRepository;
 import com.pismo.pismotransactions.repository.TransactionRepository;
 import com.pismo.pismotransactions.requests.TransactionResponse;
+import com.pismo.pismotransactions.services.impl.TransactionServiceImpl;
 import com.pismo.pismotransactions.util.AccountCreator;
 import com.pismo.pismotransactions.util.OperationTypeCreator;
 import com.pismo.pismotransactions.util.TransactionCreator;
@@ -29,7 +29,7 @@ class TransactionServiceTest {
 
 
     @InjectMocks
-    private TransactionService transactionService;
+    private TransactionServiceImpl transactionServiceImpl;
 
     @Mock
     private AccountRepository accountRepository;
@@ -46,7 +46,7 @@ class TransactionServiceTest {
 
         mockTransactionSaveRepository();
 
-        TransactionResponse transactionResponse = transactionService
+        TransactionResponse transactionResponse = transactionServiceImpl
                 .save(TransactionCreator.createTransactionPostBodyToBeSaved());
 
         assertThat(transactionResponse).isNotNull();
@@ -57,7 +57,7 @@ class TransactionServiceTest {
         mockTransactionSaveRepositoryWithoutAccount();
 
         assertThatExceptionOfType(TransactionException.class)
-                .isThrownBy(() -> transactionService
+                .isThrownBy(() -> transactionServiceImpl
                         .save(TransactionCreator.createTransactionPostBodyToBeSaved()));
     }
 
