@@ -23,13 +23,13 @@ public class AccountService {
         return AccountMapper.toDTO(accountRepository.save(account));
     }
 
-    public AccountResponse findById(Long accountId) {
-        return AccountMapper.toDTO(accountRepository.findById(accountId).get());
+    public AccountResponse findByDocumentNumber(Long accountId) {
+        return AccountMapper.toDTO(accountRepository.findByDocumentNumber(accountId).get());
     }
 
     private void isAccountExists(Long documentNumber) {
         if (accountRepository.findByDocumentNumber(documentNumber).isPresent()) {
-            new AccountException("Account already exists with documentNumer: " + documentNumber);
+            throw new AccountException("Account already exists with documentNumer: " + documentNumber);
         }
     }
 

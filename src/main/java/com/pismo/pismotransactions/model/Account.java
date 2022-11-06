@@ -1,14 +1,17 @@
 package com.pismo.pismotransactions.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-@Data
+
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @Table(name = "accounts")
 public class Account {
 
@@ -20,7 +23,7 @@ public class Account {
     @Column(name = "document_number", unique = true)
     private Long documentNumber;
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
     private List<Transaction> transactions;
 
 }

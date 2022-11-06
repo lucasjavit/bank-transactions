@@ -1,12 +1,14 @@
 package com.pismo.pismotransactions.requests;
 
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.math.BigDecimal;
 
 @Data
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode
 public class TransactionResponse {
 
     private Long transactionId;

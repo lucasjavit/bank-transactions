@@ -24,8 +24,8 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AccountResponse> findById(@PathVariable long id) {
-        return new ResponseEntity<>(accountService.findById(id), HttpStatus.OK);
+    public ResponseEntity<AccountResponse> findByDocumentNumber(@PathVariable long id) {
+        return new ResponseEntity<>(accountService.findByDocumentNumber(id), HttpStatus.OK);
     }
 
 }
