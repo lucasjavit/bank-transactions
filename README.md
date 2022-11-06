@@ -1,5 +1,5 @@
 
-# Rotina de transações - PISMO
+# Rotina de transações
 
 - Modules: 
     - Account
@@ -15,6 +15,8 @@
 - Maven
 - Database H2
 - Hibernate JPA
+- OpenApi
+- Swagger
 
 
 ## Installation
@@ -95,4 +97,12 @@ curl --location --request POST 'http://localhost:8080/transactions/' \
     "operation_type_id": 4,
     "amount": 123.45
 }'
+```
+
+## Documentação Swagger
+
+- Para acessar a documentação Swagger
+
+```bash
+http://localhost:8080/swagger-ui/index.html
 ```
