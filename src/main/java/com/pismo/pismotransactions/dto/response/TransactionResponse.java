@@ -1,5 +1,6 @@
 package com.pismo.pismotransactions.dto.response;
 
+import com.pismo.pismotransactions.model.OperationType;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -11,11 +12,9 @@ import java.math.BigDecimal;
 @EqualsAndHashCode
 public class TransactionResponse {
 
-    private Long transactionId;
-
     private Long accountId;
 
-    private Long operationTypeId;
+    private OperationType operationType;
 
     private BigDecimal amount;
 

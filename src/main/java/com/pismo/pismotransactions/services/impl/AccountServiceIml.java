@@ -6,6 +6,7 @@ import com.pismo.pismotransactions.exception.AccountException;
 import com.pismo.pismotransactions.mapper.AccountMapper;
 import com.pismo.pismotransactions.model.Account;
 import com.pismo.pismotransactions.repository.AccountRepository;
+import com.pismo.pismotransactions.repository.UserRepository;
 import com.pismo.pismotransactions.services.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,11 +20,19 @@ public class AccountServiceIml implements AccountService {
 
     private final AccountRepository accountRepository;
 
+    private final UserRepository userRepository;
+
     public AccountResponse save(AccountPostBody accountPostBody) {
         isAccountExists(accountPostBody.getDocumentNumber());
 
+        var user = userRepository.findById(accountPostBody.getUserId())
+                .orElseThrow(() -> new AccountException("User not founded"));
+
         Account account = AccountMapper.INSTANCE.toEntity(accountPostBody);
         account.setCredit(new BigDecimal(100).setScale(2));
+        account.setUser(user);
+
+        user.getAccounts().add(account);
 
         return AccountMapper.INSTANCE.toDTO(accountRepository.save(account));
     }

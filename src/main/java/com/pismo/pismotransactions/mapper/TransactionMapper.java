@@ -1,31 +1,28 @@
 package com.pismo.pismotransactions.mapper;
 
+import com.pismo.pismotransactions.dto.response.TransactionResponse;
 import com.pismo.pismotransactions.model.Account;
 import com.pismo.pismotransactions.model.OperationType;
 import com.pismo.pismotransactions.model.Transaction;
-import com.pismo.pismotransactions.dto.response.TransactionResponse;
+import org.mapstruct.InjectionStrategy;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", injectionStrategy = InjectionStrategy.CONSTRUCTOR)
 public abstract class TransactionMapper {
 
     public static final TransactionMapper INSTANCE = Mappers.getMapper(TransactionMapper.class);
 
-    public static TransactionResponse toDTO(Transaction transaction) {
-        return TransactionResponse.builder()
-                .transactionId(transaction.getId())
-                .accountId(transaction.getAccount().getId())
-                .operationTypeId(transaction.getOperationType().getId())
-                .amount(transaction.getAmount())
-                .eventDate(transaction.getEventDate().toString())
-                .build();
-    }
+
+    @Mapping(source = "transaction.account.id", target = "accountId")
+    @Mapping(source = "transaction.operationType.", target = "operationType")
+    public abstract TransactionResponse toDTO(Transaction transaction);
+
 
     public static Transaction toEntity(Account account, OperationType operationType, BigDecimal amount) {
         Transaction transaction = new Transaction();
@@ -36,7 +33,4 @@ public abstract class TransactionMapper {
         return transaction;
     }
 
-    public List<TransactionResponse> toListDTO(List<Transaction> transactions) {
-        return transactions.stream().map(it -> toDTO(it)).collect(Collectors.toList());
-    }
 }

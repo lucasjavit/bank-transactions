@@ -1,5 +1,6 @@
 package com.pismo.pismotransactions.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -31,5 +32,10 @@ public class Account {
     @JsonManagedReference
     @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<Transaction> transactions;
+
+    @JsonBackReference
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }

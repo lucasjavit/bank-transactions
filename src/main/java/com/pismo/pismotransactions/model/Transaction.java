@@ -28,7 +28,7 @@ public class Transaction {
     @JoinColumn(name = "account_id")
     private Account account;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "operation_type_id")
     private OperationType operationType;
 

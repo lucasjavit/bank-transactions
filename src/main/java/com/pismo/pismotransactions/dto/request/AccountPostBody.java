@@ -17,4 +17,8 @@ public class AccountPostBody {
     @JsonProperty("document_number")
     @NotNull(message = "The documentNumber cannot be empty")
     private Long documentNumber;
+
+    @JsonProperty("user_iD")
+    @NotNull(message = "UserId is empty")
+    private Long userId;
 }

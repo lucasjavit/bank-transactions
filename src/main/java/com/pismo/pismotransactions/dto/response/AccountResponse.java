@@ -12,7 +12,7 @@ public class AccountResponse {
 
     private Long documentNumber;
 
-    private List<TransactionResponse> transactions;
-
     private BigDecimal credit;
+
+    private List<TransactionResponse> transactions;
 }

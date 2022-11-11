@@ -47,6 +47,5 @@ public class TransactionControllerTestIt {
         assertThat(transactionResponseResponseEntity).isNotNull();
         assertThat(transactionResponseResponseEntity.getStatusCode()).isEqualTo(HttpStatus.CREATED);
         assertThat(transactionResponseResponseEntity.getBody()).isNotNull();
-        assertThat(transactionResponseResponseEntity.getBody().getTransactionId()).isNotNull();
     }
 }

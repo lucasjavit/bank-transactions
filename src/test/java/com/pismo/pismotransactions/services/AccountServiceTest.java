@@ -4,8 +4,10 @@ import com.pismo.pismotransactions.dto.response.AccountResponse;
 import com.pismo.pismotransactions.exception.AccountException;
 import com.pismo.pismotransactions.model.Account;
 import com.pismo.pismotransactions.repository.AccountRepository;
+import com.pismo.pismotransactions.repository.UserRepository;
 import com.pismo.pismotransactions.services.impl.AccountServiceIml;
 import com.pismo.pismotransactions.util.AccountCreator;
+import com.pismo.pismotransactions.util.UserCreator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,10 +32,14 @@ class AccountServiceTest {
     @Mock
     private AccountRepository accountRepository;
 
+    @Mock
+    private UserRepository userRepository;
+
 
     @BeforeEach
     void setUp() {
         when(accountRepository.save(ArgumentMatchers.any(Account.class))).thenReturn(AccountCreator.createValidAccount());
+        when(userRepository.findById(ArgumentMatchers.any())).thenReturn(Optional.ofNullable(UserCreator.getUserSaved()));
     }
 
     @Test

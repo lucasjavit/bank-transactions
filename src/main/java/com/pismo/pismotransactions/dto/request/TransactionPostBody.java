@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
@@ -20,6 +21,7 @@ public class TransactionPostBody {
     private Long operationTypeId;
 
     @NotNull(message = "The amount cannot be null")
+    @DecimalMin(value = "1.0", message = "amount should be equal or bigger than 1.0")
     private BigDecimal amount;
 
 }

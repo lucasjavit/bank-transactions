@@ -15,8 +15,7 @@ public abstract class AccountMapper {
 
     public abstract Account toEntity(AccountPostBody accountPostBody);
 
-
-    @Mapping(source = "account.transactions", target = "transactions")
+//    @Mapping(source = "account.transactions", target = "transactions")
     public abstract AccountResponse toDTO(Account account);
 
 }

@@ -32,7 +32,7 @@ public class TransactionServiceImpl implements TransactionService {
         var account = accountRepository.findById(transactionPostBody.getAccountId())
                 .orElseThrow(() -> new TransactionException("Account not founded."));
 
-        if (transactionPostBody.getAmount().compareTo(account.getCredit()) < 1) {
+        if (transactionPostBody.getAmount().compareTo(account.getCredit()) >= 1) {
             throw new AccountException("Operation invalid: amount is bigger than credit.");
         }
 
