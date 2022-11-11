@@ -1,4 +1,4 @@
-package com.pismo.pismotransactions.requests;
+package com.pismo.pismotransactions.dto.response;
 
 import lombok.*;
 

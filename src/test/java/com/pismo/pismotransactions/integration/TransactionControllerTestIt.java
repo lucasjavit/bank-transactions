@@ -2,8 +2,8 @@ package com.pismo.pismotransactions.integration;
 
 import com.pismo.pismotransactions.repository.AccountRepository;
 import com.pismo.pismotransactions.repository.TransactionRepository;
-import com.pismo.pismotransactions.requests.TransactionPostBody;
-import com.pismo.pismotransactions.requests.TransactionResponse;
+import com.pismo.pismotransactions.dto.request.TransactionPostBody;
+import com.pismo.pismotransactions.dto.response.TransactionResponse;
 import com.pismo.pismotransactions.util.AccountCreator;
 import com.pismo.pismotransactions.util.TransactionCreator;
 import org.junit.jupiter.api.BeforeEach;

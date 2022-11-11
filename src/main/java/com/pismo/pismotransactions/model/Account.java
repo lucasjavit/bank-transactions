@@ -1,8 +1,10 @@
 package com.pismo.pismotransactions.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -23,7 +25,11 @@ public class Account {
     @Column(name = "document_number", unique = true)
     private Long documentNumber;
 
-    @OneToMany(mappedBy = "account", fetch = FetchType.EAGER)
+    @Column(unique = true)
+    private BigDecimal credit;
+
+    @JsonManagedReference
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY)
     private List<Transaction> transactions;
 
 }

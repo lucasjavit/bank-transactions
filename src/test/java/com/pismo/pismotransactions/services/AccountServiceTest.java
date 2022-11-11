@@ -1,9 +1,9 @@
 package com.pismo.pismotransactions.services;
 
+import com.pismo.pismotransactions.dto.response.AccountResponse;
 import com.pismo.pismotransactions.exception.AccountException;
 import com.pismo.pismotransactions.model.Account;
 import com.pismo.pismotransactions.repository.AccountRepository;
-import com.pismo.pismotransactions.requests.AccountResponse;
 import com.pismo.pismotransactions.services.impl.AccountServiceIml;
 import com.pismo.pismotransactions.util.AccountCreator;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -41,11 +42,12 @@ class AccountServiceTest {
                 .save(AccountCreator.createAccountPostRequest());
 
         assertThat(accountSaved).isNotNull();
+        assertThat(accountSaved.getCredit()).isNotNull().isEqualTo(new BigDecimal(100));
     }
 
 
     @Test
-    void findByName() {
+    void findByDocumentNumber() {
         when(accountRepository.findByDocumentNumber(ArgumentMatchers.any(Long.class))).thenReturn(Optional.ofNullable(AccountCreator.createValidAccount()));
         Long expecteddocument = AccountCreator.createValidAccount().getDocumentNumber();
 
@@ -54,6 +56,7 @@ class AccountServiceTest {
         assertThat(account).isNotNull();
 
         assertThat(account.getDocumentNumber()).isNotNull().isEqualTo(expecteddocument);
+        assertThat(account.getCredit()).isNotNull().isEqualTo(new BigDecimal(100));
 
     }
 

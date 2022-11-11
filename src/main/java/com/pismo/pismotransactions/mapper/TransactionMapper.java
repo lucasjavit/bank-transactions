@@ -3,7 +3,7 @@ package com.pismo.pismotransactions.mapper;
 import com.pismo.pismotransactions.model.Account;
 import com.pismo.pismotransactions.model.OperationType;
 import com.pismo.pismotransactions.model.Transaction;
-import com.pismo.pismotransactions.requests.TransactionResponse;
+import com.pismo.pismotransactions.dto.response.TransactionResponse;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

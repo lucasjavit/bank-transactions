@@ -2,11 +2,12 @@ package com.pismo.pismotransactions.services;
 
 import com.pismo.pismotransactions.exception.TransactionException;
 import com.pismo.pismotransactions.model.Account;
+import com.pismo.pismotransactions.model.OperationType;
 import com.pismo.pismotransactions.model.Transaction;
+import com.pismo.pismotransactions.patterns.CompraParceladaOperationType;
 import com.pismo.pismotransactions.repository.AccountRepository;
 import com.pismo.pismotransactions.repository.OperationTypetRepository;
 import com.pismo.pismotransactions.repository.TransactionRepository;
-import com.pismo.pismotransactions.requests.TransactionResponse;
 import com.pismo.pismotransactions.services.impl.TransactionServiceImpl;
 import com.pismo.pismotransactions.util.AccountCreator;
 import com.pismo.pismotransactions.util.OperationTypeCreator;
@@ -20,7 +21,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.mockito.Mockito.when;
 
@@ -42,14 +42,21 @@ class TransactionServiceTest {
 
 
     @Test
-    void save() {
+    void whenAmountIsBiggerThanCreditThrowTransactionException() {
 
-        mockTransactionSaveRepository();
+        when(accountRepository.save(ArgumentMatchers.any(Account.class)))
+                .thenReturn(AccountCreator.createValidAccount());
 
-        TransactionResponse transactionResponse = transactionServiceImpl
-                .save(TransactionCreator.createTransactionPostBodyToBeSaved());
+        when(operationTypetRepository.save(OperationTypeCreator.createOperationTypeToBeSaved()))
+                .thenReturn(OperationTypeCreator.createOperationTypeToBeSaved());
 
-        assertThat(transactionResponse).isNotNull();
+        when(transactionRepository.save(ArgumentMatchers.any(Transaction.class)))
+                .thenReturn(TransactionCreator.createValidTransaction());
+
+        assertThatExceptionOfType(TransactionException.class)
+                .isThrownBy(() -> transactionServiceImpl
+                        .save(TransactionCreator.createTransactionPostBodyToBeSaved()));
+
     }
 
     @Test
@@ -67,9 +74,12 @@ class TransactionServiceTest {
 
 
     private void mockTransactionSaveRepository() {
-        when(accountRepository.save(ArgumentMatchers.any(Account.class))).thenReturn(AccountCreator.createValidAccount());
-        when(operationTypetRepository.save(OperationTypeCreator.createOperationTypeToBeSaved())).thenReturn(OperationTypeCreator.createOperationTypeToBeSaved());
-        when(transactionRepository.save(ArgumentMatchers.any(Transaction.class))).thenReturn(TransactionCreator.createValidTransaction());
+        when(accountRepository.save(ArgumentMatchers.any(Account.class)))
+                .thenReturn(AccountCreator.createValidAccount());
+        when(operationTypetRepository.save(OperationTypeCreator.createOperationTypeToBeSaved()))
+                .thenReturn(OperationTypeCreator.createOperationTypeToBeSaved());
+        when(transactionRepository.save(ArgumentMatchers.any(Transaction.class)))
+                .thenReturn(TransactionCreator.createValidTransaction());
 
         when(operationTypetRepository.findById(ArgumentMatchers.any(Long.class))).thenReturn(Optional.ofNullable(OperationTypeCreator.createOperationTypeToBeSaved()));
         when(accountRepository.findById(ArgumentMatchers.any(Long.class))).thenReturn(Optional.ofNullable(AccountCreator.createValidAccount()));

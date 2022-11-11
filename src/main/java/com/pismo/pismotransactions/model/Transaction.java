@@ -1,5 +1,6 @@
 package com.pismo.pismotransactions.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,6 +23,7 @@ public class Transaction {
     @Column(name = "transaction_id")
     private Long id;
 
+    @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "account_id")
     private Account account;

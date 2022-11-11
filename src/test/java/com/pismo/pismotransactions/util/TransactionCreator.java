@@ -1,8 +1,8 @@
 package com.pismo.pismotransactions.util;
 
 import com.pismo.pismotransactions.model.Transaction;
-import com.pismo.pismotransactions.requests.TransactionPostBody;
-import com.pismo.pismotransactions.requests.TransactionResponse;
+import com.pismo.pismotransactions.dto.request.TransactionPostBody;
+import com.pismo.pismotransactions.dto.response.TransactionResponse;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

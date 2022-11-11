@@ -1,7 +1,7 @@
 package com.pismo.pismotransactions.controller;
 
-import com.pismo.pismotransactions.requests.TransactionPostBody;
-import com.pismo.pismotransactions.requests.TransactionResponse;
+import com.pismo.pismotransactions.dto.request.TransactionPostBody;
+import com.pismo.pismotransactions.dto.response.TransactionResponse;
 import com.pismo.pismotransactions.services.TransactionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
