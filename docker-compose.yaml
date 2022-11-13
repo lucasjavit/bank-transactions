@@ -1,0 +1,51 @@
+version: "3.9"
+
+services:
+  redisserver:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - 6379:6379
+    networks:
+      backend:
+        aliases:
+          - "redis"
+  prometheus:
+    image: prom/prometheus:latest
+    volumes:
+      - "./src/main/resources/prometheus.yml:/etc/prometheus/prometheus.yml"
+    command: "--config.file=/etc/prometheus/prometheus.yml"
+    ports:
+      - "9090:9090"
+    mem_reservation: 128m
+    networks:
+      backend:
+        aliases:
+          - "prometheus"
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    mem_reservation: 128m
+    networks:
+      backend:
+        aliases:
+          - "grafana"
+
+
+  pismo-transactions:
+    image: pismo/pismo-transactions:0.0.1-SNAPSHOT
+    container_name: transactions
+    ports:
+      - "8082:8082"
+    networks:
+      backend:
+        aliases:
+          - "pismo-transactions"
+
+
+networks:
+  backend:
+    driver: bridge
