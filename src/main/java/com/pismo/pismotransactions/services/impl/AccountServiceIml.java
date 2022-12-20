@@ -11,13 +11,15 @@ import com.pismo.pismotransactions.services.AccountService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import java.math.BigDecimal;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class AccountServiceIml implements AccountService {
-
+    @Enumerated(EnumType.STRING)
     private final AccountRepository accountRepository;
 
     private final UserRepository userRepository;

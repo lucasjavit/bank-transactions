@@ -2,9 +2,7 @@ package com.pismo.pismotransactions.services;
 
 import com.pismo.pismotransactions.exception.TransactionException;
 import com.pismo.pismotransactions.model.Account;
-import com.pismo.pismotransactions.model.OperationType;
 import com.pismo.pismotransactions.model.Transaction;
-import com.pismo.pismotransactions.patterns.CompraParceladaOperationType;
 import com.pismo.pismotransactions.repository.AccountRepository;
 import com.pismo.pismotransactions.repository.OperationTypetRepository;
 import com.pismo.pismotransactions.repository.TransactionRepository;

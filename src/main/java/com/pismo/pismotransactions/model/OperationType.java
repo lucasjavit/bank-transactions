@@ -29,13 +29,13 @@ public class OperationType {
     public static OperationTypeStrategy getOperationType(Long operationId) {
         switch (operationId.intValue()) {
             case 1:
-                return new CompraAVistaOperationType();
+                return new BuyCashOperationType();
             case 2:
-                return new CompraParceladaOperationType();
+                return new InstallmentOperationType();
             case 3:
-                return new SaqueperationType();
+                return new WithDrawOperationType();
             default:
-                return new PagamentoperationType();
+                return new PaymentOperationType();
         }
     }
 

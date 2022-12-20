@@ -2,7 +2,7 @@ package com.pismo.pismotransactions.patterns;
 
 import java.math.BigDecimal;
 
-public class CompraParceladaOperationType implements OperationTypeStrategy {
+public class BuyCashOperationType implements OperationTypeStrategy {
 
 
     @Override
