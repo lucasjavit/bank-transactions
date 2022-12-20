@@ -24,11 +24,11 @@
  #### Manual
  - Clone o projeto para sua máquina
 ```bash
-git clone git@github.com:lucasjavit/pismo-transactions.git
+git clone git@github.com:lucasjavit/bank-transactions.git
 ```
 - Acesse a pasta do projeto
 ```bash
-cd pismo-transactions
+cd bank-transactions
 ```
 - Compilar o projeto
 ```bash
@@ -43,18 +43,18 @@ mvn spring-boot:run
 - Inicialize o docker
 
 ```bash
-git clone git@github.com:lucasjavit/pismo-transactions.git
+git clone git@github.com:lucasjavit/bank-transactions.git
 
 ```
 
 - Acesse a pasta do projeto
 ```bash
-cd pismo-transactions
+cd bank-transactions
 ```
 
 - Execute o projeto
 ```bash
-docker run -p 8080:8080 pismo-transactions:0.0.1-SNAPSHOT 
+docker run -p 8080:8080 bank-transactions:0.0.1-SNAPSHOT 
 ```
 
 
