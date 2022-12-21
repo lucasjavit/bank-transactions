@@ -1,6 +1,7 @@
 package com.pismo.pismotransactions.services.impl;
 
 import com.pismo.pismotransactions.dto.request.UserPostBody;
+import com.pismo.pismotransactions.dto.request.UserUpdateBody;
 import com.pismo.pismotransactions.dto.response.UserResponse;
 import com.pismo.pismotransactions.exception.TransactionException;
 import com.pismo.pismotransactions.mapper.UserMapper;
@@ -21,6 +22,16 @@ public class UserServiceImpl implements UserService {
     public UserResponse save(UserPostBody userPostBody) {
         User userSaved = userRepository.save(UserMapper.INSTANCE.toEntity(userPostBody));
         return UserMapper.INSTANCE.toDTO(userSaved);
+    }
+
+    @Override
+    public UserResponse update(long idUser, UserUpdateBody userUpdateBody) {
+        User userSaved = userRepository.findById(idUser)
+                .orElseThrow(() -> new TransactionException("User not found with id: " + idUser));
+
+        userSaved.setName(userUpdateBody.getName());
+        userSaved.setEmail(userUpdateBody.getEmail());
+        return UserMapper.INSTANCE.toDTO(userRepository.save(userSaved));
     }
 
     @Override
